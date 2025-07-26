@@ -1,235 +1,134 @@
-<!DOCTYPE html><html lang="es">
+<!DOCTYPE html>
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Fórmulas Útiles para Excel</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Donaciones - PayPal y Yappy</title>
   <style>
-    * {
-      box-sizing: border-box;
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #e0f2f1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       margin: 0;
-      padding: 0;
-    }body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #217346, #106230);
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: 100vh;
-  padding: 1rem;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
+    }
 
-h1 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  text-align: center;
-  margin-bottom: 0.5rem;
-}
+    .donation-box {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
+    }
 
-p.subtitle {
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
-  text-align: center;
-}
+    h2 {
+      color: #00796b;
+    }
 
-.container {
-  width: 100%;
-  max-width: 340px;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: 15px;
-  padding: 1rem;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-  overflow-y: auto;
-  max-height: 580px;
-  transition: background-color 0.3s ease;
-}
+    select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 15px;
+      border-radius: 10px;
+      border: none;
+      font-size: 16px;
+    }
 
-.formula-item {
-  background: rgba(38, 115, 45, 0.8);
-  border-radius: 12px;
-  padding: 0.9rem;
-  margin-bottom: 12px;
-  transition: background-color 0.3s ease;
-}
+    button {
+      background-color: #00796b;
+      color: white;
+      cursor: pointer;
+    }
 
-.formula-title {
-  font-weight: 700;
-  font-size: 1.1rem;
-  margin-bottom: 4px;
-}
+    button:hover {
+      background-color: #004d40;
+    }
 
-.formula-desc {
-  font-size: 0.9rem;
-  margin-bottom: 0.5rem;
-}
+    #paypal-button-container {
+      margin-top: 20px;
+    }
 
-.formula-code {
-  background: rgba(11, 66, 22, 0.8);
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 0.9rem;
-  padding: 6px 10px;
-  border-radius: 8px;
-  margin-bottom: 6px;
-  color: #a7e399;
-}
+    #yappy-qr {
+      margin-top: 20px;
+      display: none;
+    }
 
-a.tutorial-link {
-  display: inline-block;
-  margin-top: 6px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #adebad;
-  text-decoration: underline;
-  cursor: pointer;
-}
+    .message {
+      margin-top: 15px;
+      color: #388e3c;
+    }
 
-a.tutorial-link:hover {
-  color: #d1f3d1;
-}
-
-button.copy-btn {
-  background: #2c7a2c;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 8px;
-  font-weight: 600;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button.copy-btn:hover {
-  background: #1e541e;
-}
-
-button.copy-btn:active {
-  background: #143714;
-}
-
-footer {
-  text-align: center;
-  font-size: 0.8rem;
-  margin-top: auto;
-}
-
-/* Dark Mode */
-body.dark-mode {
-  background: #121212;
-  color: #e0e0e0;
-}
-
-body.dark-mode .container {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-body.dark-mode .formula-item {
-  background: rgba(38, 38, 38, 0.8);
-}
-
-body.dark-mode .formula-code {
-  background: rgba(22, 22, 22, 0.9);
-}
-
-#dark-mode-toggle {
-  position: fixed;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: #fff;
-  cursor: pointer;
-  transition: transform 0.3s ease;
-}
-
-#dark-mode-toggle:hover {
-  transform: scale(1.2);
-}
-
-.logo {
-  width: 120px;
-  height: auto;
-  margin: 10px;
-  cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.logo:hover {
-  transform: scale(1.1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-}
-
+    img.qr {
+      width: 180px;
+      border-radius: 10px;
+    }
   </style>
 </head>
 <body>
-  <img class="logo" src="./NuevoLogo.png" alt="Logo Principal">
-  <img class="logo" src="./Excel.jpg" alt="Logo Excel">  <h1>Fórmulas Útiles para Excel</h1>
-  <p class="subtitle">Haz clic en "Copiar" para usar la fórmula en tu hoja de cálculo.</p>
-  <div class="container">
-    <div class="formula-item">
-      <div class="formula-title">Suma de un rango</div>
-      <div class="formula-desc">Suma todos los valores del rango A1 a A10.</div>
-      <code class="formula-code">=SUMA(A1:A10)</code>
-      <button class="copy-btn">Copiar</button>
-      <a href="https://youtu.be/rvlzKnUVT_Q?si=5YvpV23Ew7vbqYVf" class="tutorial-link" target="_blank">Ver Tutorial</a>
-    </div><div class="formula-item">
-  <div class="formula-title">Promedio</div>
-  <div class="formula-desc">Calcula el promedio del rango B1 a B10.</div>
-  <code class="formula-code">=PROMEDIO(B1:B10)</code>
-  <button class="copy-btn">Copiar</button>
-  <a href="https://youtu.be/3aHEq5Tej_s?si=g5WNij1iWJqxPcIY" class="tutorial-link" target="_blank">Ver Tutorial</a>
-</div>
+  <div class="donation-box">
+    <h2>Donaciones</h2>
+    <label for="amount">Selecciona el monto:</label>
+    <select id="amount">
+      <option value="1">1 USD</option>
+      <option value="2">2 USD</option>
+      <option value="3">3 USD</option>
+      <option value="4">4 USD</option>
+      <option value="5">5 USD</option>
+    </select>
 
-<div class="formula-item">
-  <div class="formula-title">Macros en Excel</div>
-  <div class="formula-desc">Aprende a usar macros para automatizar tareas.</div>
-  <code class="formula-code">Alt + F11 para abrir el editor VBA</code>
-  <button class="copy-btn">Copiar</button>
-  <a href="https://youtu.be/jjoeK6rzQDA?si=n9KdL4OP-UKJzria" class="tutorial-link" target="_blank">Ver Tutorial</a>
-</div>
+    <button onclick="mostrarYappy()">Donar con Yappy</button>
+    <div id="yappy-qr">
+      <p>Escanea este QR con tu app Yappy:</p>
+      <img id="qr-img" class="qr" src="" alt="QR Yappy" />
+    </div>
 
-<div class="formula-item">
-  <div class="formula-title">Sumar horas</div>
-  <div class="formula-desc">Suma dos celdas con horas (formato hh:mm).</div>
-  <code class="formula-code">=A1+B1</code>
-  <button class="copy-btn">Copiar</button>
-  <a href="https://youtu.be/1RVXmISX3KA?si=wqqC-dXmT1M7ZGJb" class="tutorial-link" target="_blank">Ver Tutorial</a>
-</div>
+    <div id="paypal-button-container"></div>
 
-<div class="formula-item">
-  <div class="formula-title">Restar horas</div>
-  <div class="formula-desc">Calcula la diferencia entre dos horas.</div>
-  <code class="formula-code">=B1-A1</code>
-  <button class="copy-btn">Copiar</button>
-  <a href="https://youtu.be/mAkiNNeUrTs?si=fpnIuA83Go86lMiW" class="tutorial-link" target="_blank">Ver Tutorial</a>
-</div>
+    <div class="message" id="message"></div>
+  </div>
 
-<div class="formula-item">
-  <div class="formula-title">Concatenar textos</div>
-  <div class="formula-desc">Une el contenido de dos celdas.</div>
-  <code class="formula-code">=CONCATENAR(A1, " ", B1)</code>
-  <button class="copy-btn">Copiar</button>
-  <a href="https://youtu.be/LmYfIMP1mJE?si=WN8NAbm2uDjp49rZ" class="tutorial-link" target="_blank">Ver Tutorial</a>
-</div>
-
-  </div>  <footer>App creada con ❤️ para mejorar tu experiencia con Excel.</footer><button id="dark-mode-toggle">☀</button>
+  <!-- PayPal JS SDK (Sandbox) -->
+  <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
 
   <script>
-    document.querySelectorAll('.copy-btn').forEach(button => {
-      button.addEventListener('click', () => {
-        const formula = button.previousElementSibling.textContent;
-        navigator.clipboard.writeText(formula).then(() => {
-          button.textContent = '¡Copiado!';
-          setTimeout(() => button.textContent = 'Copiar', 1500);
-        }).catch(() => alert('Error al copiar. Intenta de nuevo.'));
-      });
-    });
+    // PayPal Render
+    paypal.Buttons({
+      createOrder: function(data, actions) {
+        const amount = document.getElementById("amount").value;
+        return actions.order.create({
+          purchase_units: [{
+            amount: {
+              value: amount
+            }
+          }]
+        });
+      },
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+          document.getElementById("message").innerHTML = 
+            `¡Gracias, ${details.payer.name.given_name}, por tu donación de $${details.purchase_units[0].amount.value}! 💖`;
+        });
+      }
+    }).render('#paypal-button-container');
 
-    const darkModeToggle = document.getElementById('dark-mode-toggle');
-    darkModeToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark-mode');
-      darkModeToggle.innerHTML = document.body.classList.contains('dark-mode') ? '&#9729;' : '&#9728;';
-    });
-  </script></body>
+    // Yappy QR Generación (Simulación)
+    function mostrarYappy() {
+      const amount = document.getElementById("amount").value;
+      const qr = document.getElementById("qr-img");
+      const qrContainer = document.getElementById("yappy-qr");
+      const message = document.getElementById("message");
+
+      // Aquí puedes reemplazar este QR por una API de Yappy o tu propio enlace personalizado
+      const yappyLink = `https://quickchart.io/qr?text=Donación%20de%20$${amount}%20a%20Carlos`;
+
+      qr.src = yappyLink;
+      qrContainer.style.display = "block";
+      message.innerHTML = "Procesa el pago con tu app Yappy 📲";
+    }
+  </script>
+</body>
 </html>
