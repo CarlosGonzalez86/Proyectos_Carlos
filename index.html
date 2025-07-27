@@ -13,6 +13,7 @@
       margin: 0;
       transition: background 0.5s, color 0.5s;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
     }
@@ -29,6 +30,7 @@
       width: 100%;
       text-align: center;
       transition: background 0.4s, color 0.4s;
+      margin-top: 40px;
     }
     .dark .donation-box {
       background: rgba(36,37,46,0.96);
@@ -132,12 +134,35 @@
       background: linear-gradient(90deg,#222c36 50%,#26c6da 100%);
       color: #fff;
     }
+    footer.glass {
+      background: rgba(255,255,255,0.85);
+      color: #2563eb;
+      transition: background 0.3s, color 0.3s;
+      width: 100%;
+      padding: 22px 0 10px 0;
+      margin-top: 40px;
+    }
+    .dark footer.glass {
+      background: rgba(36,37,46,0.93);
+      color: #93c5fd;
+    }
+    footer img.bandera {
+      height: 38px;
+      width: auto;
+      margin-bottom: 10px;
+    }
+    footer p {
+      font-size: 1em;
+      margin: 0;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
   </style>
 </head>
 <body>
+  <!-- Botón modo oscuro/flotante -->
   <div id="darkModeToggle" title="Modo claro/oscuro">
     <span id="darkModeIcon">
-      <!-- Icono sol/luna SVG -->
       <svg id="iconSunMoon" xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-yellow-400 dark:text-yellow-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <g id="iconSun">
           <circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="2" fill="currentColor"/>
@@ -177,6 +202,12 @@
     <div class="message" id="message"></div>
     <div id="agradecimiento" style="display:none;" class="agradecimiento"></div>
   </div>
+
+  <!-- Footer -->
+  <footer class="glass flex flex-col items-center justify-center text-center gap-2">
+      <img class="bandera" src="Imagenes/NuevoLogo.png" alt="Logo">
+      <p>© Creado por Licdo. Carlos E. González.</p>
+  </footer>
 
   <!-- PayPal JS SDK: USA TU CLIENT ID EN PRODUCCIÓN -->
   <script src="https://www.paypal.com/sdk/js?client-id=ASiLk_fbFzTEcHsq_5N9hayGIlNzIwqvD9aSgITdwsTtcPOekUV-OeAYbTUlllq6VM5ZvQETTgI4zQE2&currency=USD"></script>
@@ -236,7 +267,7 @@
       const agradecimiento = document.getElementById("agradecimiento");
 
       // Pon aquí la URL de tu QR PERSONAL DE YAPPY:
-      const yappyLink = "q-Yappy.jpg"; // ejemplo: "Imagenes/yappy-qr.png"
+      const yappyLink = "Imagenes/q-Yappy.jpg"; // ejemplo: "Imagenes/yappy-qr.png"
       qr.src = yappyLink;
       qrContainer.style.display = "block";
       message.innerHTML = "Procesa el pago con tu app Yappy 📲";
