@@ -32,7 +32,7 @@
     .logo-centrado {
       display: block;
       margin: 0 auto 12px auto;
-      width: 100px;
+      width: 110px;
       max-width: 180px;
       height: auto;
       box-shadow: 0 2px 14px rgba(0,0,0,0.09);
@@ -41,6 +41,16 @@
     }
     .logo-centrado:hover {
       box-shadow: 0 4px 28px rgba(38,198,218,0.17);
+      filter: brightness(1.1);
+    }
+    .logo-indicacion {
+      font-size: 0.98em;
+      color: #555;
+      margin-bottom: 10px;
+      margin-top: -2px;
+    }
+    .dark .logo-indicacion {
+      color: #b2ebf2;
     }
     .encabezado h1 {
       font-size: 2em;
@@ -48,9 +58,11 @@
       margin: 0;
       font-weight: bold;
       letter-spacing: 0.03em;
+      text-shadow: 0 2px 8px #b2ebf244;
     }
     .dark .encabezado h1 {
       color: #26c6da;
+      text-shadow: none;
     }
     .donation-box {
       background: rgba(255,255,255,0.94);
@@ -125,6 +137,9 @@
       box-shadow: 0 2px 12px rgba(36,37,46,0.13);
       border: 2px solid #b2ebf2;
       background: #fff;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
     }
     .dark img.qr {
       background: #232336;
@@ -195,9 +210,10 @@
 <body>
   <!-- Encabezado personalizado -->
   <header class="encabezado">
-    <a href="https://carlosgonzalez86.github.io/Web_Carlos/" target="_blank" class="logo-link">
+    <a href="https://carlosgonzalez86.github.io/Web_Carlos/" target="_blank" class="logo-link" title="Visita mi página web">
       <img src="NuevoLogo (1).png" alt="Logo Carlos González" class="logo-centrado"/>
     </a>
+    <p class="logo-indicacion">Haz clic en el logo para visitar mi página web</p>
     <h1>Contribución Voluntaria</h1>
   </header>
   <!-- Botón modo oscuro/flotante -->
@@ -242,17 +258,13 @@
     <div class="message" id="message"></div>
     <div id="agradecimiento" style="display:none;" class="agradecimiento"></div>
   </div>
-
   <!-- Footer -->
   <footer class="glass flex flex-col items-center justify-center text-center gap-2">
       <img class="bandera" src="NuevoLogo (1).png" alt="Logo">
       <p>© Creado por Licdo. Carlos E. González.</p>
   </footer>
-
   <!-- PayPal JS SDK: USA TU CLIENT ID EN PRODUCCIÓN -->
   <script src="https://www.paypal.com/sdk/js?client-id=ASiLk_fbFzTEcHsq_5N9hayGIlNzIwqvD9aSgITdwsTtcPOekUV-OeAYbTUlllq6VM5ZvQETTgI4zQE2&currency=USD"></script>
-  <!-- Reemplaza el Client ID arriba si es necesario -->
-
   <script>
     // Modo oscuro
     function toggleDarkMode() {
@@ -279,7 +291,6 @@
       updateIcon();
     });
     document.getElementById('darkModeToggle').onclick = toggleDarkMode;
-
     // PAYPAL DONACION
     paypal.Buttons({
       createOrder: function(data, actions) {
@@ -298,23 +309,23 @@
         });
       }
     }).render('#paypal-button-container');
-
     // YAPPY QR
     function mostrarYappy() {
       const qr = document.getElementById("qr-img");
       const qrContainer = document.getElementById("yappy-qr");
       const message = document.getElementById("message");
-      const agradecimiento = document.getElementById("agradecimiento");
-
       // Pon aquí la URL de tu QR PERSONAL DE YAPPY:
-      const yappyLink = "Imagenes/q-Yappy.jpg"; // ejemplo: "Imagenes/q-Yappy.jpg"
+      const yappyLink = "Imagenes/q-Yappy.png"; // <-- Cambia aquí según tu imagen real (revisa el nombre y la extensión)
+      qr.onerror = function() {
+        message.innerHTML = "No se encontró la imagen QR. Verifica la ruta y el nombre del archivo.";
+        qrContainer.style.display = "none";
+      };
       qr.src = yappyLink;
+      qr.alt = "QR Yappy";
       qrContainer.style.display = "block";
       message.innerHTML = "Procesa el pago con tu app Yappy 📲";
-      // Mensaje de agradecimiento
       mostrarAgradecimiento(null, document.getElementById("amount").value);
     }
-
     // Mensaje de agradecimiento personalizado
     function mostrarAgradecimiento(nombre, monto) {
       const agradecimiento = document.getElementById("agradecimiento");
