@@ -14,7 +14,6 @@
       height: 100vh;
       margin: 0;
     }
-
     .donation-box {
       background: white;
       padding: 30px;
@@ -24,11 +23,7 @@
       width: 100%;
       text-align: center;
     }
-
-    h2 {
-      color: #00796b;
-    }
-
+    h2 { color: #00796b; }
     select, button {
       width: 100%;
       padding: 10px;
@@ -37,35 +32,16 @@
       border: none;
       font-size: 16px;
     }
-
     button {
       background-color: #00796b;
       color: white;
       cursor: pointer;
     }
-
-    button:hover {
-      background-color: #004d40;
-    }
-
-    #paypal-button-container {
-      margin-top: 20px;
-    }
-
-    #yappy-qr {
-      margin-top: 20px;
-      display: none;
-    }
-
-    .message {
-      margin-top: 15px;
-      color: #388e3c;
-    }
-
-    img.qr {
-      width: 180px;
-      border-radius: 10px;
-    }
+    button:hover { background-color: #004d40; }
+    #paypal-button-container { margin-top: 20px; }
+    #yappy-qr { margin-top: 20px; display: none;}
+    .message { margin-top: 15px; color: #388e3c;}
+    img.qr { width: 180px; border-radius: 10px;}
   </style>
 </head>
 <body>
@@ -79,31 +55,27 @@
       <option value="4">4 USD</option>
       <option value="5">5 USD</option>
     </select>
-
     <button onclick="mostrarYappy()">Donar con Yappy</button>
     <div id="yappy-qr">
       <p>Escanea este QR con tu app Yappy:</p>
       <img id="qr-img" class="qr" src="" alt="QR Yappy" />
     </div>
-
     <div id="paypal-button-container"></div>
-
     <div class="message" id="message"></div>
   </div>
 
-  <!-- PayPal JS SDK (Sandbox) -->
-  <script src="https://www.paypal.com/sdk/js?client-id=sb&currency=USD"></script>
+  <!-- PayPal JS SDK: USA TU CLIENT ID (NO EL DE SANDBOX) -->
+  <script src="https://www.paypal.com/sdk/js?client-id=TU_CLIENT_ID_AQUI&currency=USD"></script>
+  <!-- Reemplaza TU_CLIENT_ID_AQUI por tu Client ID real de PayPal -->
 
   <script>
-    // PayPal Render
+    // PAYPAL DONACION
     paypal.Buttons({
       createOrder: function(data, actions) {
         const amount = document.getElementById("amount").value;
         return actions.order.create({
           purchase_units: [{
-            amount: {
-              value: amount
-            }
+            amount: { value: amount }
           }]
         });
       },
@@ -115,15 +87,14 @@
       }
     }).render('#paypal-button-container');
 
-    // Yappy QR Generación (Simulación)
+    // YAPPY QR
     function mostrarYappy() {
-      const amount = document.getElementById("amount").value;
       const qr = document.getElementById("qr-img");
       const qrContainer = document.getElementById("yappy-qr");
       const message = document.getElementById("message");
 
-      // Aquí puedes reemplazar este QR por una API de Yappy o tu propio enlace personalizado
-      const yappyLink = `https://quickchart.io/qr?text=Donación%20de%20$${amount}%20a%20Carlos`;
+      // PON AQUI LA URL DE TU QR PERSONAL DE YAPPY
+      const yappyLink = "URL_DE_TU_QR_AQUI"; // ejemplo: "Imagenes/yappy-qr.png"
 
       qr.src = yappyLink;
       qrContainer.style.display = "block";
