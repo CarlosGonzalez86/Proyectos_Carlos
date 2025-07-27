@@ -21,6 +21,37 @@
       background: linear-gradient(135deg,#232336 0%,#004d40 100%);
       color: #f3f4f6;
     }
+    .encabezado {
+      text-align: center;
+      margin-top: 32px;
+      margin-bottom: 26px;
+    }
+    .encabezado .logo-link {
+      display: inline-block;
+    }
+    .logo-centrado {
+      display: block;
+      margin: 0 auto 12px auto;
+      width: 100px;
+      max-width: 180px;
+      height: auto;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.09);
+      border-radius: 15px;
+      transition: box-shadow 0.3s;
+    }
+    .logo-centrado:hover {
+      box-shadow: 0 4px 28px rgba(38,198,218,0.17);
+    }
+    .encabezado h1 {
+      font-size: 2em;
+      color: #00796b;
+      margin: 0;
+      font-weight: bold;
+      letter-spacing: 0.03em;
+    }
+    .dark .encabezado h1 {
+      color: #26c6da;
+    }
     .donation-box {
       background: rgba(255,255,255,0.94);
       padding: 30px;
@@ -30,7 +61,7 @@
       width: 100%;
       text-align: center;
       transition: background 0.4s, color 0.4s;
-      margin-top: 40px;
+      margin-top: 10px;
     }
     .dark .donation-box {
       background: rgba(36,37,46,0.96);
@@ -141,7 +172,7 @@
       width: 100%;
       padding: 22px 0 10px 0;
       margin-top: 40px;
-      text-align: center; /* Centra el contenido */
+      text-align: center;
     }
     .dark footer.glass {
       background: rgba(36,37,46,0.93);
@@ -149,7 +180,7 @@
     }
     footer img.bandera {
       display: block;
-      margin: 0 auto 10px auto; /* Centra la imagen y añade margen inferior */
+      margin: 0 auto 10px auto;
       height: 38px;
       width: auto;
     }
@@ -162,6 +193,13 @@
   </style>
 </head>
 <body>
+  <!-- Encabezado personalizado -->
+  <header class="encabezado">
+    <a href="https://carlosgonzalez86.github.io/Web_Carlos/" target="_blank" class="logo-link">
+      <img src="NuevoLogo (1).png" alt="Logo Carlos González" class="logo-centrado"/>
+    </a>
+    <h1>Contribución Voluntaria</h1>
+  </header>
   <!-- Botón modo oscuro/flotante -->
   <div id="darkModeToggle" title="Modo claro/oscuro">
     <span id="darkModeIcon">
@@ -269,7 +307,7 @@
       const agradecimiento = document.getElementById("agradecimiento");
 
       // Pon aquí la URL de tu QR PERSONAL DE YAPPY:
-      const yappyLink = "Imagenes/q-Yappy.jpg"; // ejemplo: "Imagenes/yappy-qr.png"
+      const yappyLink = "Imagenes/q-Yappy.jpg"; // ejemplo: "Imagenes/q-Yappy.jpg"
       qr.src = yappyLink;
       qrContainer.style.display = "block";
       message.innerHTML = "Procesa el pago con tu app Yappy 📲";
